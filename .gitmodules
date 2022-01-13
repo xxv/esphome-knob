@@ -1,0 +1,3 @@
+[submodule "esp-box"]
+	path = housing/esp-box
+	url = git@github.com:xxv/esp-box.git
