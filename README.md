@@ -39,9 +39,11 @@ Directions
 
 ### 3D print the housing
 
-The housing is designed in [OpenSCAD](https://openscad.org/). If you're new
-to OpenSCAD, you'll need to download a copy, load up the `.scad` files in it,
-render them, then export them to `.stl` files.
+The housing is designed in [OpenSCAD](https://openscad.org/). For convenince,
+there are rendered versions of all the files in the
+[housing/rendered](housing/rendered) directory. If you want to modify the
+design, you'll need to download a copy of OpenSCAD, load up the `.scad` files
+in it, make your changes, render them, then export them to `.stl` files.
 
 Note: this repository uses a git submodule for part of the housing, so you'll
 need to make sure you update your submodules:
@@ -143,7 +145,7 @@ encoders work](https://esphome.io/components/sensor/rotary_encoder.html) in
 this context, so I won't repeat that here. If we want a perfect
 rotary encoder signal, we should add some signal filtering to the encoder as
 recommended by the datasheet. This helps keep everything working smoothly,
-so we don't have suprious jumps on the output (see also: debouncing). If this
+so we don't have spurious jumps on the output (see also: debouncing). If this
 tickles your fancy, look into rotary encoders that come on breakout boards that
 have the filter capicators on them, as that will save you a lot of hassle when
 wiring up the panel-mount style that we're doing here.
