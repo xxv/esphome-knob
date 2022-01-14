@@ -32,7 +32,7 @@ Ingredients
 
  * 3D printed top piece [top.stl](housing/rendered/top.stl) or [top.scad](housing/top.scad)
  * 3D printed bottom piece [bottom.stl](housing/rendered/bottom.stl) or [bottom.scad](housing/bottom.scad) - this is sized for the version of the d1 mini board I got off ebay. May need adjustments for different boards.
- * laser cut top plate [housing/rendered/top_laser_cut_plate.svg](housing/rendered/top_laser_cut_plate.svg) or [top_laser_cut_plate.scad](housing/top_laser_cut_plate.scad) cut from 3mm (0.118") thick [LED black acrylic](https://www.tapplastics.com/product/plastics/cut_to_size_plastic/black_led_sheet/668)
+ * laser cut top plate [top_laser_cut_plate.svg](housing/rendered/top_laser_cut_plate.svg) or [top_laser_cut_plate.scad](housing/top_laser_cut_plate.scad) cut from 3mm (0.118") thick [LED black acrylic](https://www.tapplastics.com/product/plastics/cut_to_size_plastic/black_led_sheet/668)
 
 Directions
 ----------
