@@ -3,6 +3,8 @@ ESPHome Knob
 
 A big knob. Y'know, for doing knobby things.
 
+![a big knob](knob.jpg)
+
 This connects to [Home Assistant](https://www.home-assistant.io/) using
 [Esphome](https://esphome.io/). The firmware configuration in
 this repository is set up for submitting 0-10 ratings, but it could be easily
@@ -30,27 +32,36 @@ Ingredients
 
  * 3D printed top piece `housing/top.scad`
  * 3D printed bottom piece `housing/bottom.scad` - this is sized for the version of the d1 mini board I got off ebay. May need adjustments for different boards.
- * laser cut top plate `housing/laser_cut_top_plate.scad` cut from [LED black acrylic](https://www.tapplastics.com/product/plastics/cut_to_size_plastic/black_led_sheet/668)
+ * laser cut top plate `housing/laser_cut_top_plate.scad` cut from 3mm (0.118") thick [LED black acrylic](https://www.tapplastics.com/product/plastics/cut_to_size_plastic/black_led_sheet/668)
 
 Directions
 ----------
 
 ### 3D print the housing
 
+The housing is designed in [OpenSCAD](https://openscad.org/). If you're new
+to OpenSCAD, you'll need to download a copy, load up the `.scad` files in it,
+render them, then export them to `.stl` files.
+
+Note: this repository uses a git submodule for part of the housing, so you'll
+need to make sure you update your submodules:
+
+    git submodule init
+    git submodule update
+
 Print out the top and bottom housing pieces. I used black PETG with a 0.2mm
 layer height and supports on the bottom part. The top part should be printed
 so the large flat part is face down on your bed.
 
 I had some stringing in the baffles for the LEDs, which I got rid of by
-blowing hot air onto the part for a couple seconds with a heat gun set to high.
-If you don't clean out stringing, you'll see it when the light shines through
-the baffles.
+blowing hot air through the holes for a couple of seconds with a heat gun set
+to high. If you don't clean out stringing, you'll see it when the light shines
+through the baffles.
 
 Once printed and cleaned, using a soldering iron set to 250°C (or whatever
 is appropriate for the plastic you use), install the heat-set inserts into
-the 4 corners holes on the top and bottom, then inside (for holding the LEDs
-to the top piece). I ended up only using 2 inserts+screws for the LEDs and that
-was fine.
+the 8 corner holes on the top and bottom, then inside (for holding the LEDs
+to the top piece). I ended up only using 2 inserts+screws to mount the LEDs.
 
 ### laser cut the top plate
 
