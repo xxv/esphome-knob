@@ -27,7 +27,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Hot-Tub-Time Fallback Hotspot"
+    ssid: "Knob Fallback Hotspot"
     password: !secret ESP_AP_PWD
 
 captive_portal:
@@ -60,7 +60,7 @@ binary_sensor:
                   green: 100%
                   blue: 0
               - homeassistant.event:
-                  event: esphome.hot_tub_rating
+                  event: esphome.knob_level
                   data_template:
                     rating: "{{ rating|int() }}"
                   variables:
