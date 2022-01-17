@@ -1,0 +1,154 @@
+esphome:
+  name: esp-knob
+
+  on_boot:
+    then:
+      - output.turn_off: gpio_d8
+      - sensor.rotary_encoder.set_value:
+          id: knob
+          value: -1
+
+esp8266:
+  board: d1_mini
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret ESP_API_PWD
+
+ota:
+  password: !secret ESP_OTA_PWD
+
+wifi:
+  ssid: !secret WIFI_SSID
+  password: !secret WIFI_PASSWORD
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Knob Fallback Hotspot"
+    password: !secret ESP_AP_PWD
+
+captive_portal:
+
+# Because we don't have a spare ground pin, use an output set to off
+# as ground.
+output:
+  - platform: gpio
+    pin: D8
+    id: gpio_d8
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: D4
+      inverted: True
+      mode: INPUT_PULLUP
+    name: "Knob Button"
+    on_press:
+      then:
+        - if:
+            condition:
+              lambda: |-
+                return id(knob).state > -1;
+            then:
+              - light.turn_on:
+                  id: led_ring_lights
+                  effect: none
+                  red: 0
+                  green: 100%
+                  blue: 0
+              - homeassistant.event:
+                  event: esphome.knob_level
+                  data_template:
+                    rating: "{{ rating|int() }}"
+                  variables:
+                    rating: !lambda |-
+                      return id(knob).state;
+              - delay: 1s
+              - sensor.rotary_encoder.set_value:
+                  id: knob
+                  value: -1
+              - light.turn_on:
+                  id: led_ring_lights
+                  effect: rainbow
+
+sensor:
+  - platform: rotary_encoder
+    id: knob
+    name: "Knob"
+    pin_a:
+      number: D3
+      mode: INPUT_PULLUP
+    pin_b:
+      number: D2
+      mode: INPUT_PULLUP
+    min_value: -1
+    max_value: 20
+    restore_mode: ALWAYS_ZERO
+    on_value:
+      then:
+        - if:
+            condition:
+              lambda: |-
+                return x > -1;
+            then:
+              - light.turn_on:
+                  id: led_ring_lights
+                  effect: none
+              - light.addressable_set:
+                  id: led_ring_lights
+                  range_from: 0
+                  range_to: 39
+                  red: 0%
+                  green: 0%
+                  blue: 0%
+              - light.addressable_set:
+                  id: led_ring_lights
+                  range_from: !lambda |-
+                    int x_int = x;
+                    return 39 - (x_int * 2 - 1);
+                  range_to: !lambda |-
+                    int x_int = x;
+
+                    if (x_int == 0) {
+                      return -1;
+                    } else {
+                      return 39;
+                    }
+
+                  red: !lambda |-
+                    return (x/20.0);
+                  green: 0%
+                  blue: 100%
+            else:
+              - light.turn_on:
+                  id: led_ring_lights
+                  effect: rainbow
+
+light:
+  - platform: fastled_spi
+    name: "light ring"
+    id: led_ring_lights
+    chipset: APA102
+    data_pin: D7
+    clock_pin: D5
+    num_leds: 40
+    rgb_order: BGR
+    default_transition_length: 0s
+    # Color correction below is used to limit the brightness so the device
+    # doesn't draw more than 500mA from the USB port.
+    color_correct: [50%, 50%, 50%]
+    restore_mode: ALWAYS_ON
+    effects:
+      - addressable_rainbow:
+          width: 40
+
+      #display:
+      #  - platform: addressable_light
+      #    id: led_ring_display
+      #    addressable_light_id: led_ring_lights
+      #    width: 40
+      #    height: 1
+
