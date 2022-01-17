@@ -130,8 +130,8 @@ The LED ring should connect to the D1 as follows:
 
  * LED G → d1_mini G
  * LED 5V → d1_mini 5V
- * LED DI → d1_mini D3
- * LED CI → d1_mini D2
+ * LED DI → d1_mini D7
+ * LED CI → d1_mini D5
 
 (you can confirm this mapping in the yaml file)
 
@@ -167,10 +167,10 @@ For our signal wires, we'll be using the ESP8266's built-in pull-up resistors,
 which again simplifies wiring. Finally, let's wire this up!
 Solder 4 pieces of 8-10cm hookup wire as follows:
 
- * encoder A → D5
+ * encoder A → D2
  * encoder G → D8
- * encoder B → D6
- * switch → D7 (the other pin of the switch is wired directly to encoder G)
+ * encoder B → D3
+ * switch → D4 (the other pin of the switch is wired directly to encoder G)
 
 Don't worry about getting A and B mixed up; you can just swap the pins in the
 yaml file to flip it around if it rotates the wrong way.

@@ -42,7 +42,7 @@ output:
 binary_sensor:
   - platform: gpio
     pin:
-      number: D7
+      number: D4
       inverted: True
       mode: INPUT_PULLUP
     name: "Knob Button"
@@ -79,10 +79,10 @@ sensor:
     id: knob
     name: "Knob"
     pin_a:
-      number: D5
+      number: D3
       mode: INPUT_PULLUP
     pin_b:
-      number: D6
+      number: D2
       mode: INPUT_PULLUP
     min_value: -1
     max_value: 10
@@ -132,8 +132,8 @@ light:
     name: "light ring"
     id: led_ring_lights
     chipset: APA102
-    data_pin: D3
-    clock_pin: D2
+    data_pin: D7
+    clock_pin: D5
     num_leds: 40
     rgb_order: BGR
     default_transition_length: 0s
